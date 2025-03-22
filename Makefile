@@ -29,11 +29,11 @@ libmlx:
 $(LIBFT):
 	$(QUIET)make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(QUIET)$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(HEADERS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) libmlx
+	$(QUIET)$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME)
 
 %.o: %.c
-	$(QUIET)$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS) && printf "Compiling $(notdir $<)"
+	$(QUIET)$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS) && printf "Compiling $(notdir $<)\n"
 
 clean:
 	$(QUIET)rm -f $(OBJS)
@@ -46,4 +46,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean re fclean, libmlx
+.PHONY: all clean re fclean libmlx
