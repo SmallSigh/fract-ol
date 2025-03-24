@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinc -Ilib/libft -Wunreachable-code -Ofast
+CFLAGS = -Wall -Wextra -Werror -Iinc -Ilib/libft -Wunreachable-code -Ofast -g
 
 LIBMLX = ./lib/MLX42
 HEADERS	:= -I ./include -I $(LIBMLX)/include
@@ -10,12 +10,13 @@ LIBFT_DIR = lib/libft
 
 SRCS = \
 	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/mlx_init.c
 
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-NAME = a.out
+NAME = fractal
 
 ifneq ($(SHOW),1)
 QUIET = @

@@ -12,127 +12,115 @@
 
 #include "main_header.h"
 
-#define MAX_ITERATIONS 100
+#define INSTRUCTIONS "Welcome to my fractal render\n\n\
+Usage: ./fractal [(fractal 1-3)] [flags]\n\n\
+Fractals:\n\
+\t1. Mandelbrot\n\t2. Burning Ship\n\
+\t3. Sierpinski/Zelda\n\t4. Barnsley Fern\n\n\
+Flags:\n\
+\t-m for maximized window\n\
+\t-b for black and white colours\n\
+\t-c for inverted colours\n"
 
-int	get_color(int iterations)
+#define FLAG_MAXIMIZE		"-m"
+#define FLAG_BLACK_WHITE	"-b"
+#define FLAG_INVERT			"-c"
+
+typedef struct flags_s
 {
-		int colors[] = {
-			RED,
-			GREEN,
-			BLUE,
-			YELLOW,
-			CYAN,
-			MAGENTA,
-			ORANGE,
-			PURPLE,
-			WHITE,
-			BLACK
-	};
-	if (iterations == MAX_ITERATIONS)
-		return (BLACK);
-	return colors[iterations % 10];
+	bool	maximize;
+	bool	invert;
+	bool	monochrome;
+}			flags_t;
+
+void	entry_guide()
+{
+	ft_printf(INSTRUCTIONS);
+	exit(1);
 }
 
-// explain complex numbers eg. z
-// ib = in_bounds
-int	draw_mandelbrot(double real, double imaginary)
+void	print_entry_error()
 {
-	double ib;
-	double n_real;
-	double temp;
-	int iteration;
+	ft_printf("Inputs are considered invalid, please try contacting support\n");
+	ft_printf(INSTRUCTIONS);
+	exit(1);
+}
 
-	iteration = 0;
-	ib = 0;
-	n_real = 0;
-	while ((ib * ib + n_real * n_real <= 4) && iteration < MAX_ITERATIONS)
+void	choose_fractal(char *user_input)
+{
+	if (!ft_strncmp(user_input, "1", 1))
 	{
-		temp = ib * ib - n_real * n_real + real;
-		imaginary = 2 * ib * n_real * imaginary;
-		ib = temp;
-		iteration++;
+		ft_printf("User has choosen: Mandelbrot\n");
+
 	}
-	return (iteration);
-}
-
-void	compute_coords(t_fractol *fractol, double *real, double *imaginary)
-{
-	*real = (fractol->x - WIDTH / 2.0);
-	*real = *real * fractol->zoom + fractol->offsetX;
-	*imaginary = (fractol->y - HEIGHT / 2.0);
-	*imaginary = *imaginary *fractol->zoom + fractol->offsetY;
-}
-
-void	draw_fractol(t_fractol *fractol)
-{
-	double	real_part;
-	double imaginary_part;
-	int iterations;
-	int color;
-
-	fractol->y = 0;
-	while (fractol->y < HEIGHT)
+	else if (!ft_strncmp(user_input, "2", 1))
 	{
-	fractol->x = 0;
-		while (fractol->x < WIDTH)
-		{
-			compute_coords(fractol, &real_part, &imaginary_part);
-			iterations = draw_mandelbrot(real_part, imaginary_part);
-			color = get_color(iterations);
-			mlx_put_pixel(fractol->img, fractol->x, fractol->y, color);
-			fractol->x++;
-		}
-		fractol->y++;
+		ft_printf("User has choosen: Burning Ship\n");
+
+	}
+	else if (!ft_strncmp(user_input, "3", 1))
+	{
+		ft_printf("User has choosen: Sierpinski/Zelda\n");
+
+	}
+	else if (!ft_strncmp(user_input, "4", 1))
+	{
+		ft_printf("User has choosen: Barnsley Fern\n");
+
+	}
+	else
+		print_entry_error();
+}
+
+void	parse_flags(int ac, char **av)
+{
+	int i;
+	flags_t *flag;
+	flags_init(flag);
+
+	i = 2;
+	while (i < ac)
+	{
+		if (!ft_strncmp(av[i], FLAG_MAXIMIZE, 2))
+			flag->maximize = true;
+		else if (!ft_strncmp(av[i], FLAG_INVERT, 2))
+			flag->invert = true;
+		else if (!ft_strncmp(av[i], FLAG_BLACK_WHITE, 2))
+			flag->monochrome = true;
+		else
+			print_entry_error();
+		i++;
 	}
 }
 
-void	fractol_init(t_fractol *fractol, mlx_t *mlx)
+void	parse_input(char **av)
 {
-	fractol->zoom = 4.0 / WIDTH;
-	fractol->offsetX = -2.0;
-	fractol->offsetY = -2.0;
-	fractol->img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!fractol->img)
-		exit (1);
+	int user_input = ft_atoi(av[1]);
+	if (user_input >= 1 || user_input <= 4)
+		choose_fractal(av[1]);
+	else
+		print_entry_error();
 }
 
-void	mlx_key_hook(mlx_key_data_t *mlx_key_data, void *param)
+void	user_input(int ac, char **av)
 {
-	t_fractol *fractol;
-	fractol = (t_fractol *)param;
-
-	(void)mlx_key_data;
-	// if (mlx_key_data.action == MLX_RELEASE)
-	// 	return;
-	// if (mlx_key_data.key == MLX_KEY_UP)
-	// 	fractol->offsetY -= fractol->zoom * 20;
-	// if (mlx_key_data.key == MLX_KEY_DOWN)
-	// 	fractol->offsetY += fractol->zoom * 20;
-	// if (mlx_key_data.key == MLX_KEY_LEFT)
-	// 	fractol->offsetX -= fractol->zoom * 20;
-	// if (mlx_key_data.key == MLX_KEY_RIGHT)
-	// 	fractol->offsetX += fractol->zoom * 20;
-	// if (mlx_key_data.key == MLX_KEY_EQUAL)
-	// 	fractol->zoom *= 0.9;
-	// if (mlx_key_data.key == MLX_KEY_MINUS)
-	// 	fractol->zoom /= 0.9;
-
-	draw_fractol(fractol);
+	if (ac == 1)
+		entry_guide();
+	if (ac == 2)
+		parse_input(av);
+	if (ac >=3 && ac <= 5)
+		parse_flags(ac, av);
+	if (ac > 5)
+		print_entry_error();
 }
 
-int	main(void)
+int main(int ac, char **av)
 {
-	mlx_t		*mlx;
-	t_fractol	fractol;
+    mlx_t *mlx;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
-	if (!mlx)
-		return (1);
-	fractol_init(&fractol, mlx);
-	mlx_image_to_window(mlx, fractol.img, 0, 0);
-	draw_fractol(&fractol);
-	mlx_key_hook(mlx, &fractol);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (0);
+	mlx = NULL;
+	user_input(ac, av);
+	start_mlx(&mlx);
+    cleanup(mlx);
+    return (0);
 }

@@ -9,8 +9,6 @@
  #include <stdlib.h>
  #include <stdio.h>
  #include <unistd.h>
- #define WIDTH 1080
- #define HEIGHT 1080
 
  #define BLACK		0x000000FF
  #define WHITE		0xFFFFFF00
@@ -23,14 +21,59 @@
  #define ORANGE		0xFFA500FF
  #define PURPLE		0x800080FF
 
- typedef struct s_fractol
- {
-	double		zoom;
-	double		offsetX;
-	double		offsetY;
-	int			x;
-	int			y;
-	mlx_image_t	*img;
- }				t_fractol;
+ #define WIDTH 1080
+ #define HEIGHT 1080
+
+ #define INSTRUCTIONS "Welcome to my fractal render\n\n\
+Usage: ./fractal [(fractal 1-3)] [flags]\n\n\
+Fractals:\n\
+\t1. Mandelbrot\n\t2. Burning Ship\n\
+\t3. Sierpinski/Zelda\n\t4. Barnsley Fern\n\n\
+Flags:\n\
+\t-m for maximized window\n\
+\t-b for black and white colours\n\
+\t-c for inverted colours\n"
+
+#define FLAG_MAXIMIZE		"-m"
+#define FLAG_BLACK_WHITE	"-b"
+#define FLAG_INVERT			"-c"
+
+typedef struct flags_s
+{
+	bool	maximize;
+	bool	invert;
+	bool	monochrome;
+}			flags_t;
+
+// mandelbrot struct
+
+// r = real number z
+// i = imaginary number z
+// tranlate number to coordinates
+// cr = coordinates real
+// ci = coordiantes imaginary
+
+// i = iterations
+// mi = max iterations
+// zoom
+// x = offsetX
+// y = offsetY
+
+typedef struct mandelbrot_s
+{
+	double	r;
+	double	i;
+	double	cr;
+	double	ci;
+	int		iter;
+	int		mi;
+	double	zoom;
+	double	x;
+	double	y;
+}		mandelbrot_t;
+
+ void	start_mlx(mlx_t **mlx);
+ void	ft_hook(mlx_key_data_t key_data, void *param);
+ void	cleanup(mlx_t *mlx);
 
 #endif
