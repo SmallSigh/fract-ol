@@ -10,7 +10,10 @@ LIBFT_DIR = lib/libft
 
 SRCS = \
 	$(SRC_DIR)/main.c \
-	$(SRC_DIR)/mlx_init.c
+	$(SRC_DIR)/mlx_init.c \
+	$(SRC_DIR)/parse_input.c \
+	$(SRC_DIR)/fractal.c \
+	$(SRC_DIR)/utils.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -24,19 +24,29 @@
  #define WIDTH 1080
  #define HEIGHT 1080
 
- #define INSTRUCTIONS "Welcome to my fractal render\n\n\
+ #define INSTRUCTIONS "\n\n\
+ \
 Usage: ./fractal [(fractal 1-3)] [flags]\n\n\
 Fractals:\n\
-\t1. Mandelbrot\n\t2. Burning Ship\n\
-\t3. Sierpinski/Zelda\n\t4. Barnsley Fern\n\n\
+	\t1. Mandelbrot\n\
+	\t2. Burning Ship\n\
+	\t3. Sierpinski/Zelda\n\
+	\t4. Barnsley Fern\n\n\
 Flags:\n\
-\t-m for maximized window\n\
-\t-b for black and white colours\n\
-\t-c for inverted colours\n"
+	\t-m for maximized window\n\
+	\t-b for black and white colours\n\
+	\t-c for inverted colours\n\n"
 
 #define FLAG_MAXIMIZE		"-m"
 #define FLAG_BLACK_WHITE	"-b"
 #define FLAG_INVERT			"-c"
+
+// typedef struct user_input_s
+// {
+// 	int		ac;
+// 	char	**av;
+// 	flags_t	flag;
+// }			user_input_t;
 
 typedef struct flags_s
 {
@@ -72,8 +82,15 @@ typedef struct mandelbrot_s
 	double	y;
 }		mandelbrot_t;
 
- void	start_mlx(mlx_t **mlx);
+ void	start_mlx(mlx_t **mlx, flags_t *flag);
  void	ft_hook(mlx_key_data_t key_data, void *param);
- void	cleanup(mlx_t *mlx);
+ void	cleanup(mlx_t *mlx, flags_t *flag);
+
+//  parse attempt
+void	user_input(int ac, char **av, flags_t *flag);
+void	entry_guide(flags_t *flag);
+
+// flags for fanciness
+void    flags_init(flags_t *flag);
 
 #endif
