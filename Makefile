@@ -13,7 +13,8 @@ SRCS = \
 	$(SRC_DIR)/mlx_init.c \
 	$(SRC_DIR)/parse_input.c \
 	$(SRC_DIR)/fractal.c \
-	$(SRC_DIR)/utils.c
+	$(SRC_DIR)/utils.c \
+	$(SRC_DIR)/mandelbrot.c
 
 OBJS = $(SRCS:.c=.o)
 
