@@ -18,22 +18,17 @@ void	entry_guide()
 	exit(1);
 }
 
-void	flags_init(fractal_t *f)
-{
-	f->flag.invert = false;
-	f->flag.maximize = false;
-	f->flag.monochrome = false;
-	f->flag.terminal = false;
-}
-
 int	main(int ac, char **av)
 {
 	fractal_t	f;
 
-	init_fractal(&f, 0);
+	init_flag_bools(&f);
+	init_fractal_bools(&f);
 	user_input(ac, av, &f);
-	// render(&f);
 	start_mlx(&f);
+	ft_printf("error\n");
+	render(&f);
+	mlx_loop(f.mlx);
 	cleanup(&f);
 	return (0);
 }

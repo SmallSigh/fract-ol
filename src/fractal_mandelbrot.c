@@ -12,38 +12,30 @@
 
 #include "main_header.h"
 
-uint32_t get_mono_colors(uint32_t color, int intensity)
+uint32_t get_mono_colors(int intensity)
 {
-	// TODO;
-	// make colors turn grey;
-	(void)intensity;
-	return (color);
+	return (SET_MONO((uint8_t)intensity));
 }
 
 static uint32_t	mandelbrot_color(int iter,fractal_t *f)
 {
 	double t;
 	uint8_t intensity;
-	uint32_t	color;
 	static uint32_t colors[8] =	{RED, ORANGE, YELLOW, GREEN,
-								CYAN, BLUE, MAGENTA, PURPLE };
+								CYAN, BLUE, MAGENTA, PURPLE};
 
-	color = 0;
 	if (iter == MAX_ITERATIONS)
 	{
 		if (f->flag.invert)
 			return (WHITE);
 		return (BLACK);
 	}
+	t = (double)iter / MAX_ITERATIONS;
+	intensity = 255 * t;
+	if (f->flag.invert)
+		intensity = 255 - intensity;
 	if (f->flag.monochrome)
-	{
-		t = (double)iter / MAX_ITERATIONS;
-		intensity = 255 * t;
-		if (f->flag.invert)
-			intensity = 255 - intensity;
-		color = colors[get_mono_colors(color, intensity)];
-		return (color);
-	}
+		return (get_mono_colors(intensity));
 	return (colors[iter % 8]);
 }
 
@@ -59,13 +51,12 @@ static int	mandelbrot_iter(double cr, double ci)
 	iter = 0;
 	while (iter < MAX_ITERATIONS)
 	{
-		while (zr * zr + zi * zi <= 4.0)
-		{
-			temp = zr * zr - zi * zi + cr;
-			zi = 2 * zr * zi + ci;
-			zr = temp;
-			iter++;
-		}
+		if (zr * zr + zi * zi > 4.0)
+			break ;
+		temp = zr * zr - zi * zi + cr;
+		zi = 2 * zr * zi + ci;
+		zr = temp;
+		iter++;
 	}
 	return (iter);
 }
@@ -74,20 +65,19 @@ void	draw_mandelbrot(fractal_t *f)
 {
 	int x;
 	int y;
-	int iter;
 	double cr;
 	double ci;
 
 	y = 0;
-	while (y < (int)f->img->height)
+	while (y < f->w_size.height)
 	{
 		x = 0;
-		while (x < (int)f->img->width)
+		while (x < f->w_size.width)
 		{
-			cr = (x - f->img->width / 2.0) * 4.0 / (f->img->width * f->zoom) + f->x;
-			ci = (x - f->img->height / 2.0) * 4.0 / (f->img->height * f->zoom) + f->y;
-			iter = mandelbrot_iter(cr, ci);
-			mlx_put_pixel(f->img, x, y, mandelbrot_color(iter, f));
+			cr = (x - f->w_size.width / 2.0) * 4.0 / (f->w_size.width * f->zoom) + f->x;
+			ci = (y - f->w_size.height / 2.0) * 4.0 / (f->w_size.height * f->zoom) + f->y;
+            mlx_put_pixel(f->img, x, y,
+                mandelbrot_color(mandelbrot_iter(cr, ci), f));
 			x++;
 		}
 		y++;

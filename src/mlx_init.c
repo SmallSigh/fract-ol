@@ -12,26 +12,14 @@
 
 #include "main_header.h"
 
-void	ft_hook(mlx_key_data_t key_data, void *param)
-{
-	fractal_t *f;
 
-	f = param;
-	if (key_data.action == MLX_PRESS)
-	{
-		if (key_data.key == MLX_KEY_ESCAPE)
-			mlx_close_window(f->mlx);
-		if (key_data.key == MLX_KEY_UP)
-			ft_printf("up key has been pressed\n");
-		if (key_data.key == MLX_KEY_DOWN)
-			ft_printf("down key has been pressed\n");
-	}
-}
+// check if working is intended
+
+// returns if mouse position is inside or outside of window
 
 void	print_error_and_exit(char *str)
 {
 	ft_printf("ERROR: %s", str);
-	exit (1);
 }
 
 void	choose_window_size(fractal_t *f)
@@ -42,33 +30,29 @@ void	choose_window_size(fractal_t *f)
 	if (f->flag.maximize)
 	{
 		mlx_get_monitor_size(0, &width, &height);
-		mlx_set_window_size(f->mlx, width, height);
-		f->mlx->height = height;
-		f->mlx->width = width;
-		f->mlx = mlx_init(width, height, "Big Fractol", false);
-		f->img = mlx_new_image(f->mlx, width, height);
+		f->w_size.height = height;
+		f->w_size.width = width;
+		f->mlx = mlx_init(width, height, "Big Fractol", true);
 	}
 	else
 	{
-		f->mlx->height = WIDTH;
-		f->mlx->width = HEIGHT;
+		f->w_size.height = HEIGHT;
+		f->w_size.width = WIDTH;
 		f->mlx = mlx_init(WIDTH, HEIGHT, "small fractol", false);
-		f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	}
-	if (!f->mlx)
-		print_error_and_exit("failed to initialize mlx window.\n");
-	if (!f->img)
-		print_error_and_exit("failed to put image to window.\n");
 }
 
 void	start_mlx(fractal_t *f)
 {
 	choose_window_size(f);
 	mlx_key_hook(f->mlx, ft_hook, f);
+	mlx_scroll_hook(f->mlx, ft_scrollhook, f);
 }
 
 void	cleanup(fractal_t *f)
 {
+	if(f->img)
+		mlx_delete_image(f->mlx, f->img);
 	if (f->mlx != NULL)
 		mlx_terminate(f->mlx);
 }
