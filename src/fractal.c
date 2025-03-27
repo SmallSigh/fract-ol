@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:23:45 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/26 17:25:59 by masmit           ###   ########.fr       */
+/*   Updated: 2025/03/27 14:16:57 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	init_f_fractal(fractal_t *f)
 	f->img = NULL;
 }
 
-void draw_sierpinsky(fractal_t *f)
+void	draw_sierpinsky(fractal_t *f)
 {
 	(void)f;
 }
 
-void draw_fern(fractal_t *f)
+void	draw_fern(fractal_t *f)
 {
 	(void)f;
 }

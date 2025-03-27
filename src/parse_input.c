@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/27 14:16:39 by masmit            #+#    #+#             */
+/*   Updated: 2025/03/27 14:31:31 by masmit           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main_header.h"
 
 void	print_entry_error(void)
@@ -39,7 +51,7 @@ void	choose_fractal(char *user_input, fractal_t *f)
 // 1 is fractal choice
 void	parse_flags(int ac, char **av, fractal_t *f)
 {
-	int i;
+	int	i;
 
 	i = 2;
 	while (i < ac)
@@ -60,7 +72,8 @@ void	parse_flags(int ac, char **av, fractal_t *f)
 
 void	parse_input(char **av, fractal_t *f)
 {
-	int user_input;
+	int	user_input;
+
 	user_input = ft_atoi(av[1]);
 	if (user_input >= 1 && user_input <= 4)
 		choose_fractal(av[1], f);
@@ -74,7 +87,7 @@ void	user_input(int ac, char **av, fractal_t *f)
 		entry_guide(f);
 	if (ac == 2)
 		parse_input(av, f);
-	if (ac >=3 && ac <= 5)
+	if (ac >= 3 && ac <= 5)
 		parse_flags(ac, av, f);
 	if (ac > 5)
 		print_entry_error();
