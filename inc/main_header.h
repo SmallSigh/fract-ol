@@ -23,6 +23,8 @@
  #define ORANGE		0xFFA500FF
  #define PURPLE		0x800080FF
 
+ #define DEBUG ft_printf("%s, %d"__FILE__, __LINE__)
+
 //  for monochrome
 // grey is in different brigtness, 0xFF for white
 // 16 for red to grey
@@ -47,9 +49,10 @@ Fractals:\n\
 	\t3. Sierpinski/Zelda\n\
 	\t4. Barnsley Fern\n\n\
 Flags:\n\
-	\t-m for maximized window\n\
+	\t-f for fullscreen window\n\
 	\t-b for black and white colours\n\
-	\t-c for inverted colours\n\n"
+	\t-c for inverted colours\n\
+	\t-t for fractal in terminal, WIP, only for mandelbrot\n"
 
 typedef struct fractal_type_s
 {
@@ -59,7 +62,7 @@ typedef struct fractal_type_s
 	bool	BARNSLEY_FERN;
 }	fractal_type_t;
 
-#define FLAG_MAXIMIZE		"-m"
+#define FLAG_MAXIMIZE		"-f"
 #define FLAG_BLACK_WHITE	"-b"
 #define FLAG_INVERT			"-c"
 #define FLAG_TERMINAL		"-t"

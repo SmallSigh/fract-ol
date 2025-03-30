@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	user_input(ac, av, &f);
 	start_mlx(&f);
 	render(&f);
+	// ft_printf("getting here\n");
 	mlx_loop(f.mlx);
 	cleanup(&f);
 	return (0);

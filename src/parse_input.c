@@ -56,13 +56,17 @@ void	parse_flags(int ac, char **av, fractal_t *f)
 	i = 2;
 	while (i < ac)
 	{
-		if (!ft_strncmp(av[i], FLAG_MAXIMIZE, 4))
+		if (!ft_strncmp(av[i], FLAG_MAXIMIZE, 4) &&
+			f->flag.maximize == false)
 			f->flag.maximize = true;
-		else if (!ft_strncmp(av[i], FLAG_INVERT, 4))
+		else if (!ft_strncmp(av[i], FLAG_INVERT, 4) &&
+			f->flag.invert == false)
 			f->flag.invert = true;
-		else if (!ft_strncmp(av[i], FLAG_BLACK_WHITE, 4))
+		else if (!ft_strncmp(av[i], FLAG_BLACK_WHITE, 4) &&
+			f->flag.monochrome == false)
 			f->flag.monochrome = true;
-		else if (!ft_strncmp(av[i], FLAG_TERMINAL, 4))
+		else if (!ft_strncmp(av[i], FLAG_TERMINAL, 4) &&
+			f->flag.terminal == false)
 			f->flag.terminal = true;
 		else
 			print_entry_error();
@@ -85,7 +89,7 @@ void	user_input(int ac, char **av, fractal_t *f)
 {
 	if (ac == 1)
 		entry_guide(f);
-	if (ac == 2)
+	if (ac >= 2)
 		parse_input(av, f);
 	if (ac >= 3 && ac <= 5)
 		parse_flags(ac, av, f);

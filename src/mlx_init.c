@@ -28,16 +28,17 @@ void	choose_window_size(fractal_t *f)
 	if (f->flag.maximize)
 	{
 		mlx_get_monitor_size(0, &width, &height);
-		mlx_set_window_size(f->mlx, width, height);
 		f->w_size.height = height;
 		f->w_size.width = width;
-		mlx_terminate(f->mlx);
+		mlx_set_window_size(f->mlx, f->w_size.width, f->w_size.height);
 		f->mlx = mlx_init(width, height, "Big Fractol", true);
 	}
 }
 
 void	start_mlx(fractal_t *f)
 {
+	if (f->flag.terminal == true)
+		return ;
 	choose_window_size(f);
 	mlx_key_hook(f->mlx, ft_hook, f);
 	mlx_scroll_hook(f->mlx, ft_scrollhook, f);

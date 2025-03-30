@@ -53,7 +53,10 @@ void	ft_scrollhook(double xdelta, double ydelta, void *param)
 	if (valid_mouse_pos(mouse_x, mouse_y, f))
 		return ;
 	if (ydelta > 0)
+	{
 		zoom_factor = 1.1;
+		ft_printf("scroll has been scrolled\n");
+	}
 	else
 		zoom_factor = 0.9;
 	zoom_at_position(f, zoom_factor, mouse_x, mouse_y);
