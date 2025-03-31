@@ -38,7 +38,7 @@
 
  #define WIDTH 1080
  #define HEIGHT 1080
- #define MAX_ITERATIONS 1000
+ #define MAX_ITERATIONS 100
 
  #define INSTRUCTIONS "\n\n\
  \
@@ -53,6 +53,11 @@ Flags:\n\
 	\t-b for black and white colours\n\
 	\t-c for inverted colours\n\
 	\t-t for fractal in terminal, WIP, only for mandelbrot\n"
+
+// mandelbrot formula = z_real² + z_imag²
+// burning ship formula = z=abs(z)^2+c
+// sierpinsky formula = n=m^d
+// not a formula, uses a % of number generation to update eiter stem or leaves
 
 typedef struct fractal_type_s
 {
@@ -123,6 +128,8 @@ void	init_fractal(fractal_t *f);
 // the fractal
 void	draw_mandelbrot(fractal_t *f);
 void	draw_burning_ship(fractal_t *f);
+void	draw_fern(fractal_t *f);
+void	draw_sierpinsky(fractal_t *f);
 
 // mlx controls function
 void	ft_hook(mlx_key_data_t key_data, void *param);

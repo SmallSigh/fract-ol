@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:16:25 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/27 14:34:39 by masmit           ###   ########.fr       */
+/*   Updated: 2025/03/31 14:19:59 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,17 @@ static void	zoom_at_position(fractal_t *f, double zoom_factor,
 	f->x = new_center_r;
 	f->y = new_center_i;
 	f->zoom *= zoom_factor;
+	if (f->zoom < 0.1)
+		f->zoom = 0.1;
+	if (f->zoom > 100000)
+		f->zoom = 100000;
 }
 
 int	valid_mouse_pos(int mouse_x, int mouse_y, fractal_t *f)
 {
 	if (mouse_x > f->w_size.width || mouse_x < 0)
 		return (1);
-	if (mouse_y > f->w_size.height || mouse_x < 0)
+	if (mouse_y > f->w_size.height || mouse_y < 0)
 		return (1);
 	return (0);
 }
@@ -53,10 +57,7 @@ void	ft_scrollhook(double xdelta, double ydelta, void *param)
 	if (valid_mouse_pos(mouse_x, mouse_y, f))
 		return ;
 	if (ydelta > 0)
-	{
 		zoom_factor = 1.1;
-		ft_printf("scroll has been scrolled\n");
-	}
 	else
 		zoom_factor = 0.9;
 	zoom_at_position(f, zoom_factor, mouse_x, mouse_y);

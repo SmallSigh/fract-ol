@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:16:39 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/27 14:31:31 by masmit           ###   ########.fr       */
+/*   Updated: 2025/03/31 16:02:37 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,17 @@ void	parse_flags(int ac, char **av, fractal_t *f)
 	i = 2;
 	while (i < ac)
 	{
-		if (!ft_strncmp(av[i], FLAG_MAXIMIZE, 4) &&
-			f->flag.maximize == false)
+		if (!ft_strncmp(av[i], FLAG_MAXIMIZE, 4)
+			&& f->flag.maximize == false)
 			f->flag.maximize = true;
-		else if (!ft_strncmp(av[i], FLAG_INVERT, 4) &&
-			f->flag.invert == false)
+		else if (!ft_strncmp(av[i], FLAG_INVERT, 4)
+			&& f->flag.invert == false)
 			f->flag.invert = true;
-		else if (!ft_strncmp(av[i], FLAG_BLACK_WHITE, 4) &&
-			f->flag.monochrome == false)
+		else if (!ft_strncmp(av[i], FLAG_BLACK_WHITE, 4)
+			&& f->flag.monochrome == false)
 			f->flag.monochrome = true;
-		else if (!ft_strncmp(av[i], FLAG_TERMINAL, 4) &&
-			f->flag.terminal == false)
+		else if (!ft_strncmp(av[i], FLAG_TERMINAL, 4)
+			&& f->flag.terminal == false)
 			f->flag.terminal = true;
 		else
 			print_entry_error();
@@ -79,7 +79,7 @@ void	parse_input(char **av, fractal_t *f)
 	int	user_input;
 
 	user_input = ft_atoi(av[1]);
-	if (user_input >= 1 && user_input <= 4)
+	if (user_input >= 1 && user_input <= 4 && !av[1][1])
 		choose_fractal(av[1], f);
 	else
 		print_entry_error();

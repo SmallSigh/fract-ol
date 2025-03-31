@@ -6,30 +6,11 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:23:45 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/27 14:16:57 by masmit           ###   ########.fr       */
+/*   Updated: 2025/03/31 15:13:48 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_header.h"
-
-void	init_f_fractal(fractal_t *f)
-{
-	f->zoom = 1.0;
-	f->x = 0;
-	f->y = 0;
-	f->color = BLACK;
-	f->img = NULL;
-}
-
-void	draw_sierpinsky(fractal_t *f)
-{
-	(void)f;
-}
-
-void	draw_fern(fractal_t *f)
-{
-	(void)f;
-}
 
 int	mandelbrot(double complex c)
 {
@@ -48,6 +29,9 @@ int	mandelbrot(double complex c)
 	return (iter);
 }
 
+// 80 for width
+// 40 for heigth
+// 10 for max iterations
 void	draw_mandelbrot_illegal(void)
 {
 	int		x;
@@ -89,7 +73,6 @@ void	illegal_check(fractal_t *f)
 void	render(fractal_t *f)
 {
 	illegal_check(f);
-	init_f_fractal(f);
 	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
 	if (f->type.MANDELBROT == true)
 		draw_mandelbrot(f);

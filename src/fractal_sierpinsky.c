@@ -6,8 +6,13 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:16:08 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/27 14:35:39 by masmit           ###   ########.fr       */
+/*   Updated: 2025/03/31 15:13:56 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_header.h"
+
+void	draw_sierpinsky(fractal_t *f)
+{
+	(void)f;
+}

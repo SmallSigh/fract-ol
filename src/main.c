@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:49:29 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/27 14:30:47 by masmit           ###   ########.fr       */
+/*   Updated: 2025/03/31 14:26:08 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int ac, char **av)
 	user_input(ac, av, &f);
 	start_mlx(&f);
 	render(&f);
-	// ft_printf("getting here\n");
 	mlx_loop(f.mlx);
 	cleanup(&f);
 	return (0);
