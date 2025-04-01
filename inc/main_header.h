@@ -5,7 +5,7 @@
 # include "../lib/libft/libft.h"
 # include "../lib/ft_printf/ft_printf.h"
 # include "MLX42/MLX42.h"
-# include "main_defines.h"
+# include "defines.h"
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -67,29 +67,30 @@ typedef struct s_fractal
 	t_julia			julia;
 }					t_fractal;
 
-void	start_mlx(t_fractal *f);
-void	cleanup(t_fractal *f);
+void		start_mlx(t_fractal *f);
+void		cleanup(t_fractal *f);
 
 //  parse attempt
-void	user_input(int ac, char **av, t_fractal *f);
-void	entry_guide(void);
+void		user_input(int ac, char **av, t_fractal *f);
+void		entry_guide(void);
 
 // init bools as false
-void	init_flag_bools(t_fractal *f);
-void	init_fractal_bools(t_fractal *f);
+void		init_flag_bools(t_fractal *f);
+void		init_fractal_bools(t_fractal *f);
 
 // the rendering
-void	render(t_fractal *f);
-void	init_fractal(t_fractal *f);
+void		render(t_fractal *f);
+void		init_fractal(t_fractal *f);
+uint32_t	fractal_color(int iter, t_fractal *f);
 
 // the fractal
-void	draw_mandelbrot(t_fractal *f);
-void	draw_burning_ship(t_fractal *f);
-void	draw_fern(t_fractal *f);
-void	draw_julia(t_fractal *f);
+void		draw_mandelbrot(t_fractal *f);
+void		draw_burning_ship(t_fractal *f);
+void		draw_fern(t_fractal *f);
+void		draw_julia(t_fractal *f);
 
 // mlx controls function
-void	ft_hook(mlx_key_data_t key_data, void *param);
-void	ft_scrollhook(double xdelta, double ydelta, void *param);
+void		ft_hook(mlx_key_data_t key_data, void *param);
+void		ft_scrollhook(double xdelta, double ydelta, void *param);
 
 #endif

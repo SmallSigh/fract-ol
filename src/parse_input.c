@@ -65,9 +65,6 @@ void	parse_flags(int ac, char **av, t_fractal *f)
 		else if (!ft_strncmp(av[i], FLAG_BLACK_WHITE, 4)
 			&& f->flag.monochrome == false)
 			f->flag.monochrome = true;
-		else if (!ft_strncmp(av[i], FLAG_TERMINAL, 4)
-			&& f->flag.terminal == false)
-			f->flag.terminal = true;
 		else
 			print_entry_error();
 		i++;
@@ -88,7 +85,7 @@ void	parse_input(char **av, t_fractal *f)
 void	user_input(int ac, char **av, t_fractal *f)
 {
 	if (ac == 1)
-		entry_guide(f);
+		entry_guide();
 	if (ac >= 2)
 		parse_input(av, f);
 	if (ac >= 3 && ac <= 5)

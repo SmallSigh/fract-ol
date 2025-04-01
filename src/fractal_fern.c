@@ -53,6 +53,19 @@ void	fern_cleanup(double *x, double *y, t_fractal *f)
 	*y = f->y;
 }
 
+uint32_t	get_color_fern(t_fractal *f)
+{
+	if (f->flag.invert == true)
+	{
+		if (f->flag.monochrome == true)
+			return (GREY_2);
+		return (PURPLE);
+	}
+	if (f->flag.monochrome == true)
+		return (GREY_8);
+	return (GREEN);
+}
+
 // checks if pixel x or pixel y is in window or outside of window
 int	is_in_window(int pixel_x_pos, int pixel_y_pos, t_fractal *f)
 {
@@ -78,7 +91,7 @@ void	draw_fern(t_fractal *f)
 		px = (int)((x - f->x) * f->w_size.width / 10 + f->w_size.width / 2);
 		py = (int)f->w_size.height - ((y - f->y) * f->w_size.height / 10);
 		if (is_in_window(px, py, f))
-			mlx_put_pixel(f->img, px, py, GREEN);
+			mlx_put_pixel(f->img, px, py, get_color_fern(f));
 		iter++;
 	}
 }

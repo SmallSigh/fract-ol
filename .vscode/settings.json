@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "main_header.h": "c",
-        "cstdint": "c"
+        "cstdint": "c",
+        "main_defines.h": "c"
     }
 }

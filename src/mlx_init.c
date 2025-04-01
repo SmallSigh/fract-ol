@@ -17,7 +17,7 @@ void	print_error_and_exit(char *str)
 	ft_printf("ERROR: %s", str);
 }
 
-void	init_f_fractal(t_fractal *f)
+void	init_fractal(t_fractal *f)
 {
 	f->zoom = 1.0;
 	f->x = 0;
@@ -52,7 +52,7 @@ void	start_mlx(t_fractal *f)
 	choose_window_size(f);
 	mlx_key_hook(f->mlx, ft_hook, f);
 	mlx_scroll_hook(f->mlx, ft_scrollhook, f);
-	init_f_fractal(f);
+	init_fractal(f);
 }
 
 void	cleanup(t_fractal *f)

@@ -1,5 +1,5 @@
-#ifndef MAIN_DEFINE_H
-# define MAIN_DEFINE_H
+#ifndef DEFINES_H
+# define DEFINES_H
 
 # define INSTRUCTIONS "\n\n\
  \
@@ -11,17 +11,16 @@ Fractals:\n\
 	\t4. Barnsley Fern\n\n\
 Flags:\n\
 	\t-f for fullscreen window\n\
-	\t-b for black and white colours\n\
-	\t-c for inverted colours\n\
-	\t-t for fractal in terminal, WIP, only for mandelbrot\n"
+	\t-m for monochrome\n\
+	\t-i for inverted colours\n\n"
 
 # define FLAG_MAXIMIZE		"-f"
-# define FLAG_BLACK_WHITE	"-b"
-# define FLAG_INVERT			"-c"
+# define FLAG_BLACK_WHITE	"-m"
+# define FLAG_INVERT		"-i"
 # define FLAG_TERMINAL		"-t"
 
 # define BLACK		0x000000FF
-# define WHITE		0xFFFFFF00
+# define WHITE		0xFAFAFAFF
 # define RED		0xFF0000FF
 # define GREEN		0x00FF00FF
 # define BLUE		0x0000FFFF
@@ -31,16 +30,16 @@ Flags:\n\
 # define ORANGE		0xFFA500FF
 # define PURPLE		0x800080FF
 
-//  for monochrome
-// grey is in different brigtness, 0xFF for white
-// 16 for red to grey
-// 8 for green to grey
-// nothing for blue to grey
-
-# define SET_MONO(gray)	((0xFF << 24) |\
-((gray) << 16) |\
-((gray) << 8) |\
-(gray))
+# define GREY_1		0xFAFAFAFF
+# define GREY_2		0xF0F0F0FF
+# define GREY_3		0xE0E0E0FF
+# define GREY_4		0xD0D0D0FF
+# define GREY_5		0xC0C0C0FF
+# define GREY_6		0xA0A0A0FF
+# define GREY_7		0x808080FF
+# define GREY_8		0x606060FF
+# define GREY_9		0x404040FF
+# define GREY_10	0x202020FF
 
 # define WIDTH 1080
 # define HEIGHT 1080

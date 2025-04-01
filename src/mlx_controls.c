@@ -31,8 +31,8 @@ static void	zoom_at_position(t_fractal *f, double zoom_factor,
 	f->zoom *= zoom_factor;
 	if (f->zoom < 0.1)
 		f->zoom = 0.1;
-	if (f->zoom > 100000)
-		f->zoom = 100000;
+	if (f->zoom > 10000000)
+		f->zoom = 10000000;
 }
 
 int	valid_mouse_pos(int mouse_x, int mouse_y, t_fractal *f)
@@ -77,10 +77,10 @@ void	reset_julia_vars(t_fractal *f)
 void	ft_hook(mlx_key_data_t key_data, void *param)
 {
 	t_fractal	*f;
-	int			update_julia;
+	double			update_julia;
 
 	f = param;
-	update_julia = 1.1;
+	update_julia = 0.01;
 	if (key_data.action == MLX_PRESS)
 	{
 		if (key_data.key == MLX_KEY_ESCAPE)
