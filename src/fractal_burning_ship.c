@@ -34,7 +34,7 @@ static int	burning_ship_iter(double cr, double ci)
 	return (iter);
 }
 
-static uint32_t	burning_ship_color(int iter, fractal_t *f)
+static uint32_t	burning_ship_color(int iter, t_fractal *f)
 {
 	double			t;
 	uint8_t			intensity;
@@ -56,7 +56,7 @@ static uint32_t	burning_ship_color(int iter, fractal_t *f)
 	return (colors[iter % 8]);
 }
 
-void	draw_burning_ship(fractal_t *f)
+void	draw_burning_ship(t_fractal *f)
 {
 	int		x;
 	int		y;

@@ -60,7 +60,7 @@ void	draw_mandelbrot_illegal(void)
 	}
 }
 
-void	illegal_check(fractal_t *f)
+void	illegal_check(t_fractal *f)
 {
 	if (f->flag.terminal == true)
 	{
@@ -70,16 +70,16 @@ void	illegal_check(fractal_t *f)
 	}
 }
 
-void	render(fractal_t *f)
+void	render(t_fractal *f)
 {
 	illegal_check(f);
-	if (f->type.MANDELBROT == true)
+	if (f->type.mandelbrot == true)
 		draw_mandelbrot(f);
-	if (f->type.BURNING_SHIP == true)
+	if (f->type.burning_ship == true)
 		draw_burning_ship(f);
-	if (f->type.JULIA == true)
+	if (f->type.julia == true)
 		draw_julia(f);
-	if (f->type.BARNSLEY_FERN == true)
+	if (f->type.barnsley_fern == true)
 		draw_fern(f);
 	mlx_image_to_window(f->mlx, f->img, 0, 0);
 }

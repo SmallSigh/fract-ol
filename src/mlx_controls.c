@@ -12,7 +12,7 @@
 
 #include "main_header.h"
 
-static void	zoom_at_position(fractal_t *f, double zoom_factor,
+static void	zoom_at_position(t_fractal *f, double zoom_factor,
 				int mouse_x, int mouse_y)
 {
 	double	mouse_r;
@@ -35,7 +35,7 @@ static void	zoom_at_position(fractal_t *f, double zoom_factor,
 		f->zoom = 100000;
 }
 
-int	valid_mouse_pos(int mouse_x, int mouse_y, fractal_t *f)
+int	valid_mouse_pos(int mouse_x, int mouse_y, t_fractal *f)
 {
 	if (mouse_x > f->w_size.width || mouse_x < 0)
 		return (1);
@@ -46,13 +46,13 @@ int	valid_mouse_pos(int mouse_x, int mouse_y, fractal_t *f)
 
 void	ft_scrollhook(double xdelta, double ydelta, void *param)
 {
-	fractal_t	*f;
+	t_fractal	*f;
 	int			mouse_x;
 	int			mouse_y;
 	double		zoom_factor;
 
 	(void)xdelta;
-	f = (fractal_t *)param;
+	f = (t_fractal *)param;
 	mlx_get_mouse_pos(f->mlx, &mouse_x, &mouse_y);
 	if (valid_mouse_pos(mouse_x, mouse_y, f))
 		return ;
@@ -64,7 +64,7 @@ void	ft_scrollhook(double xdelta, double ydelta, void *param)
 	render(f);
 }
 
-void	reset_julia_vars(fractal_t *f)
+void	reset_julia_vars(t_fractal *f)
 {
 	f->zoom = 1.0;
 	f->x = 0;
@@ -76,7 +76,7 @@ void	reset_julia_vars(fractal_t *f)
 
 void	ft_hook(mlx_key_data_t key_data, void *param)
 {
-	fractal_t	*f;
+	t_fractal	*f;
 	int			update_julia;
 
 	f = param;

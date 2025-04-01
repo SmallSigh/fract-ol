@@ -19,28 +19,28 @@ void	print_entry_error(void)
 	exit(1);
 }
 
-void	choose_fractal(char *user_input, fractal_t *f)
+void	choose_fractal(char *user_input, t_fractal *f)
 {
 	init_fractal_bools(f);
 	if (!ft_strncmp(user_input, "1", 1))
 	{
 		ft_printf("User has choosen: Mandelbrot\n");
-		f->type.MANDELBROT = true;
+		f->type.mandelbrot = true;
 	}
 	else if (!ft_strncmp(user_input, "2", 1))
 	{
 		ft_printf("User has choosen: Burning Ship\n");
-		f->type.BURNING_SHIP = true;
+		f->type.burning_ship = true;
 	}
 	else if (!ft_strncmp(user_input, "3", 1))
 	{
 		ft_printf("User has choosen: Julia-Set\n");
-		f->type.JULIA = true;
+		f->type.julia = true;
 	}
 	else if (!ft_strncmp(user_input, "4", 1))
 	{
 		ft_printf("User has choosen: Barnsley Fern\n");
-		f->type.BARNSLEY_FERN = true;
+		f->type.barnsley_fern = true;
 	}
 	else
 		print_entry_error();
@@ -49,7 +49,7 @@ void	choose_fractal(char *user_input, fractal_t *f)
 // i to 2
 // 0 is ./fractal
 // 1 is fractal choice
-void	parse_flags(int ac, char **av, fractal_t *f)
+void	parse_flags(int ac, char **av, t_fractal *f)
 {
 	int	i;
 
@@ -74,7 +74,7 @@ void	parse_flags(int ac, char **av, fractal_t *f)
 	}
 }
 
-void	parse_input(char **av, fractal_t *f)
+void	parse_input(char **av, t_fractal *f)
 {
 	int	user_input;
 
@@ -85,7 +85,7 @@ void	parse_input(char **av, fractal_t *f)
 		print_entry_error();
 }
 
-void	user_input(int ac, char **av, fractal_t *f)
+void	user_input(int ac, char **av, t_fractal *f)
 {
 	if (ac == 1)
 		entry_guide(f);

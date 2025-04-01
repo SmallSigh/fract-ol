@@ -20,7 +20,7 @@ void	entry_guide(void)
 
 int	main(int ac, char **av)
 {
-	fractal_t	f;
+	t_fractal	f;
 
 	init_flag_bools(&f);
 	init_fractal_bools(&f);

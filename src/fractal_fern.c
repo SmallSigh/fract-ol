@@ -12,6 +12,8 @@
 
 #include "main_header.h"
 
+// TODO, fix flags for fern
+
 // updates either stem, left leaf, right leaf, or
 static void	update_image(double *x, double *y, double random)
 {
@@ -42,7 +44,7 @@ static void	update_image(double *x, double *y, double random)
 	*y = new_y;
 }
 
-void	fern_cleanup(double *x, double *y, fractal_t *f)
+void	fern_cleanup(double *x, double *y, t_fractal *f)
 {
 	mlx_delete_image(f->mlx, f->img);
 	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
@@ -52,7 +54,7 @@ void	fern_cleanup(double *x, double *y, fractal_t *f)
 }
 
 // checks if pixel x or pixel y is in window or outside of window
-int	is_in_window(int pixel_x_pos, int pixel_y_pos, fractal_t *f)
+int	is_in_window(int pixel_x_pos, int pixel_y_pos, t_fractal *f)
 {
 	if (pixel_x_pos >= 0 && pixel_y_pos >= 0 && pixel_x_pos < f->w_size.width
 		&& pixel_y_pos < f->w_size.height)
@@ -60,14 +62,14 @@ int	is_in_window(int pixel_x_pos, int pixel_y_pos, fractal_t *f)
 	return (0);
 }
 
-void	draw_fern(fractal_t *f)
+void	draw_fern(t_fractal *f)
 {
 	double	x;
 	double	y;
 	int		iter;
 	int		px;
 	int		py;
-	
+
 	fern_cleanup(&x, &y, f);
 	iter = 0;
 	while (iter < FERN_ITERATIONS)

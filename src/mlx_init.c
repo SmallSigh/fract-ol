@@ -17,7 +17,7 @@ void	print_error_and_exit(char *str)
 	ft_printf("ERROR: %s", str);
 }
 
-void	init_f_fractal(fractal_t *f)
+void	init_f_fractal(t_fractal *f)
 {
 	f->zoom = 1.0;
 	f->x = 0;
@@ -28,7 +28,7 @@ void	init_f_fractal(fractal_t *f)
 	f->julia.c_imag = 0.27;
 }
 
-void	choose_window_size(fractal_t *f)
+void	choose_window_size(t_fractal *f)
 {
 	int32_t	width;
 	int32_t	height;
@@ -45,7 +45,7 @@ void	choose_window_size(fractal_t *f)
 	}
 }
 
-void	start_mlx(fractal_t *f)
+void	start_mlx(t_fractal *f)
 {
 	if (f->flag.terminal == true)
 		return ;
@@ -55,7 +55,7 @@ void	start_mlx(fractal_t *f)
 	init_f_fractal(f);
 }
 
-void	cleanup(fractal_t *f)
+void	cleanup(t_fractal *f)
 {
 	if (f->img)
 		mlx_delete_image(f->mlx, f->img);

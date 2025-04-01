@@ -1,83 +1,36 @@
 #ifndef MAIN_HEADER_H
- #define MAIN_HEADER_H
+# define MAIN_HEADER_H
 
- #include "../lib/gnl/get_next_line.h"
- #include "../lib/libft/libft.h"
- #include "../lib/ft_printf/ft_printf.h"
- #include "MLX42/MLX42.h"
+# include "../lib/gnl/get_next_line.h"
+# include "../lib/libft/libft.h"
+# include "../lib/ft_printf/ft_printf.h"
+# include "MLX42/MLX42.h"
+# include "main_defines.h"
 
- #include <stdlib.h>
- #include <stdio.h>
- #include <unistd.h>
- #include <math.h>
- #include <complex.h>
-
- #define BLACK		0x000000FF
- #define WHITE		0xFFFFFF00
- #define RED		0xFF0000FF
- #define GREEN		0x00FF00FF
- #define BLUE		0x0000FFFF
- #define YELLOW		0xFFFF00FF
- #define CYAN		0x00FFFF00
- #define MAGENTA	0xFF00FFFF
- #define ORANGE		0xFFA500FF
- #define PURPLE		0x800080FF
-
- #define DEBUG ft_printf("%s, %d"__FILE__, __LINE__)
-
-//  for monochrome
-// grey is in different brigtness, 0xFF for white
-// 16 for red to grey
-// 8 for green to grey
-// nothing for blue to grey
-
-#define SET_MONO(gray)	((0xFF << 24) |\
-						 ((gray) << 16) |\
-						 ((gray) << 8) |\
-						 (gray))
-
- #define WIDTH 1080
- #define HEIGHT 1080
- #define MAX_ITERATIONS 100
- #define FERN_ITERATIONS 100000
-
- #define INSTRUCTIONS "\n\n\
- \
-Usage: ./fractal [(fractal 1-4)] [flags]\n\n\
-Fractals:\n\
-	\t1. Mandelbrot\n\
-	\t2. Burning Ship\n\
-	\t3. Julia-set\n\
-	\t4. Barnsley Fern\n\n\
-Flags:\n\
-	\t-f for fullscreen window\n\
-	\t-b for black and white colours\n\
-	\t-c for inverted colours\n\
-	\t-t for fractal in terminal, WIP, only for mandelbrot\n"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <math.h>
+# include <complex.h>
 
 // mandelbrot formula = z_real² + z_imag²
 // burning ship formula = z=abs(z)^2+c
 // sierpinsky formula = n=m^d
 // not a formula, uses a % of number generation to update eiter stem or leaves
 
-typedef struct fractal_type_s
+typedef struct s_fractalype
 {
-	bool	MANDELBROT;
-	bool	BURNING_SHIP;
-	bool	JULIA;
-	bool	BARNSLEY_FERN;
-}	fractal_type_t;
-
-#define FLAG_MAXIMIZE		"-f"
-#define FLAG_BLACK_WHITE	"-b"
-#define FLAG_INVERT			"-c"
-#define FLAG_TERMINAL		"-t"
+	bool	mandelbrot;
+	bool	burning_ship;
+	bool	julia;
+	bool	barnsley_fern;
+}	t_fractal_type;
 
 typedef struct window_size_s
 {
-	int32_t width;
-	int32_t height;
-}	window_size_t;
+	int32_t	width;
+	int32_t	height;
+}			t_window_size;
 
 typedef struct flags_s
 {
@@ -85,13 +38,13 @@ typedef struct flags_s
 	bool	invert;
 	bool	monochrome;
 	bool	terminal;
-}			flags_t;
+}			t_flags;
 
 typedef struct julia_s
 {
 	double	c_real;
 	double	c_imag;
-}			julia_t;
+}			t_julia;
 
 /*main struct in code*/
 /*x = offset x, where on the x axis we render the pixels
@@ -107,33 +60,33 @@ typedef struct s_fractal
 	double			zoom;
 	double			x;
 	double			y;
-	fractal_type_t	type;
+	t_fractal_type	type;
 	uint32_t		color;
-	flags_t			flag;
-	window_size_t	w_size;
-	julia_t			julia;
-}					fractal_t;
+	t_flags			flag;
+	t_window_size	w_size;
+	t_julia			julia;
+}					t_fractal;
 
-void	start_mlx(fractal_t *f);
-void	cleanup(fractal_t *f);
+void	start_mlx(t_fractal *f);
+void	cleanup(t_fractal *f);
 
 //  parse attempt
-void	user_input(int ac, char **av, fractal_t *f);
-void	entry_guide();
+void	user_input(int ac, char **av, t_fractal *f);
+void	entry_guide(void);
 
 // init bools as false
-void	init_flag_bools(fractal_t *f);
-void	init_fractal_bools(fractal_t *f);
+void	init_flag_bools(t_fractal *f);
+void	init_fractal_bools(t_fractal *f);
 
 // the rendering
-void	render(fractal_t *f);
-void	init_fractal(fractal_t *f);
+void	render(t_fractal *f);
+void	init_fractal(t_fractal *f);
 
 // the fractal
-void	draw_mandelbrot(fractal_t *f);
-void	draw_burning_ship(fractal_t *f);
-void	draw_fern(fractal_t *f);
-void	draw_julia(fractal_t *f);
+void	draw_mandelbrot(t_fractal *f);
+void	draw_burning_ship(t_fractal *f);
+void	draw_fern(t_fractal *f);
+void	draw_julia(t_fractal *f);
 
 // mlx controls function
 void	ft_hook(mlx_key_data_t key_data, void *param);

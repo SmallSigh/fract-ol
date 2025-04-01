@@ -12,12 +12,14 @@
 
 #include "main_header.h"
 
+// TODO fix flags for julia
+
 uint32_t	get_mono_colors_julia(int intensity)
 {
 	return (SET_MONO((uint8_t)intensity));
 }
 
-static uint32_t	julia_color(int iter, fractal_t *f)
+static uint32_t	julia_color(int iter, t_fractal *f)
 {
 	double			t;
 	uint8_t			intensity;
@@ -39,7 +41,7 @@ static uint32_t	julia_color(int iter, fractal_t *f)
 	return (colors[iter % 8]);
 }
 
-int	julia_iter(double zx, double zy, fractal_t *f)
+int	julia_iter(double zx, double zy, t_fractal *f)
 {
 	int		iter;
 	double	temp;
@@ -50,16 +52,14 @@ int	julia_iter(double zx, double zy, fractal_t *f)
 		if (zx * zx + zy * zy > 4.0)
 			break ;
 		temp = zx * zx - zy * zy + f->julia.c_real;
-        zy = 2.0 * zx * zy + f->julia.c_imag;
-        zx = temp;
-        iter++;
+		zy = 2.0 * zx * zy + f->julia.c_imag;
+		zx = temp;
+		iter++;
 	}
 	return (iter);
 }
 
-
-
-void	draw_julia(fractal_t *f)
+void	draw_julia(t_fractal *f)
 {
 	int		x;
 	int		y;
@@ -75,8 +75,10 @@ void	draw_julia(fractal_t *f)
 		x = 0;
 		while (x < f->w_size.width)
 		{
-			zx = (x - f->w_size.width / 2.0) / (0.5 * f->zoom * f->w_size.width) + f->x;
-			zy = (y - f->w_size.height / 2.0) / (0.5 * f->zoom * f->w_size.height) + f->y;
+			zx = (x - f->w_size.width / 2.0)
+				/ (0.5 * f->zoom * f->w_size.width) + f->x;
+			zy = (y - f->w_size.height / 2.0)
+				/ (0.5 * f->zoom * f->w_size.height) + f->y;
 			iter = julia_iter(zx, zy, f);
 			mlx_put_pixel(f->img, x, y,
 				julia_color(iter, f));

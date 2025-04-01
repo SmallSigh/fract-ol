@@ -17,7 +17,7 @@ uint32_t	get_mono_colors(int intensity)
 	return (SET_MONO((uint8_t)intensity));
 }
 
-static uint32_t	mandelbrot_color(int iter, fractal_t *f)
+static uint32_t	mandelbrot_color(int iter, t_fractal *f)
 {
 	double			t;
 	uint8_t			intensity;
@@ -61,7 +61,7 @@ static int	mandelbrot_iter(double cr, double ci)
 	return (iter);
 }
 
-void	draw_mandelbrot(fractal_t *f)
+void	draw_mandelbrot(t_fractal *f)
 {
 	int		x;
 	int		y;

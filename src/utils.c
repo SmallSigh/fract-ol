@@ -12,15 +12,15 @@
 
 #include "main_header.h"
 
-void	init_fractal_bools(fractal_t *f)
+void	init_fractal_bools(t_fractal *f)
 {
-	f->type.MANDELBROT = false;
-	f->type.BURNING_SHIP = false;
-	f->type.JULIA = false;
-	f->type.BARNSLEY_FERN = false;
+	f->type.mandelbrot = false;
+	f->type.burning_ship = false;
+	f->type.julia = false;
+	f->type.barnsley_fern = false;
 }
 
-void	init_flag_bools(fractal_t *f)
+void	init_flag_bools(t_fractal *f)
 {
 	f->flag.invert = false;
 	f->flag.maximize = false;
