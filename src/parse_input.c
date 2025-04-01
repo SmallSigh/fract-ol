@@ -34,8 +34,8 @@ void	choose_fractal(char *user_input, fractal_t *f)
 	}
 	else if (!ft_strncmp(user_input, "3", 1))
 	{
-		ft_printf("User has choosen: Sierpinski/Zelda\n");
-		f->type.SIERPINSKY = true;
+		ft_printf("User has choosen: Julia-Set\n");
+		f->type.JULIA = true;
 	}
 	else if (!ft_strncmp(user_input, "4", 1))
 	{

@@ -39,6 +39,7 @@
  #define WIDTH 1080
  #define HEIGHT 1080
  #define MAX_ITERATIONS 100
+ #define FERN_ITERATIONS 100000
 
  #define INSTRUCTIONS "\n\n\
  \
@@ -46,7 +47,7 @@ Usage: ./fractal [(fractal 1-4)] [flags]\n\n\
 Fractals:\n\
 	\t1. Mandelbrot\n\
 	\t2. Burning Ship\n\
-	\t3. Sierpinski/Zelda\n\
+	\t3. Julia-set\n\
 	\t4. Barnsley Fern\n\n\
 Flags:\n\
 	\t-f for fullscreen window\n\
@@ -63,7 +64,7 @@ typedef struct fractal_type_s
 {
 	bool	MANDELBROT;
 	bool	BURNING_SHIP;
-	bool	SIERPINSKY;
+	bool	JULIA;
 	bool	BARNSLEY_FERN;
 }	fractal_type_t;
 
@@ -71,16 +72,6 @@ typedef struct fractal_type_s
 #define FLAG_BLACK_WHITE	"-b"
 #define FLAG_INVERT			"-c"
 #define FLAG_TERMINAL		"-t"
-
-/*main struct in code*/
-/*x = offset x, where on the x axis we render the pixels
-this axis is rendered with real numbers*/
-/*y = offset y, which is an axis of imaginary numbers numbers
-such as z or i*/
-
-/*complex number z = */
-
-/*complex number i = */
 
 typedef struct window_size_s
 {
@@ -96,6 +87,18 @@ typedef struct flags_s
 	bool	terminal;
 }			flags_t;
 
+typedef struct julia_s
+{
+	double	c_real;
+	double	c_imag;
+}			julia_t;
+
+/*main struct in code*/
+/*x = offset x, where on the x axis we render the pixels
+this axis is rendered with real numbers*/
+/*y = offset y, which is an axis of imaginary numbers numbers
+such as z or i*/
+
 typedef struct s_fractal
 {
 	mlx_t			*mlx;
@@ -108,6 +111,7 @@ typedef struct s_fractal
 	uint32_t		color;
 	flags_t			flag;
 	window_size_t	w_size;
+	julia_t			julia;
 }					fractal_t;
 
 void	start_mlx(fractal_t *f);
@@ -129,7 +133,7 @@ void	init_fractal(fractal_t *f);
 void	draw_mandelbrot(fractal_t *f);
 void	draw_burning_ship(fractal_t *f);
 void	draw_fern(fractal_t *f);
-void	draw_sierpinsky(fractal_t *f);
+void	draw_julia(fractal_t *f);
 
 // mlx controls function
 void	ft_hook(mlx_key_data_t key_data, void *param);

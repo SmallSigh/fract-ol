@@ -69,6 +69,7 @@ void	draw_mandelbrot(fractal_t *f)
 	double	ci;
 
 	y = 0;
+	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
 	while (y < f->w_size.height)
 	{
 		x = 0;

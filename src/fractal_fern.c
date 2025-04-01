@@ -12,29 +12,7 @@
 
 #include "main_header.h"
 
-
-static uint32_t	get_fern_color(int iter, fractal_t *f)
-{
-	double			t;
-	uint8_t			intensity;
-	static uint32_t	colors[8] = {GREEN, YELLOW, ORANGE, RED,
-		PURPLE, MAGENTA, BLUE, CYAN};
-
-	if (iter == 5000)
-	{
-		if (f->flag.invert)
-			return (WHITE);
-		return (BLACK);
-	}
-	t = (double)iter / 5000;
-	intensity = 255 * t;
-	if (f->flag.invert)
-		intensity = 255 - intensity;
-	if (f->flag.monochrome)
-		return (SET_MONO(intensity));
-	return (colors[iter % 8]);
-}
-
+// updates either stem, left leaf, right leaf, or
 static void	update_image(double *x, double *y, double random)
 {
 	double	new_x;
@@ -57,11 +35,29 @@ static void	update_image(double *x, double *y, double random)
 	}
 	else
 	{
-		new_x = 0.-15 * *x + 0.28 * *y;
+		new_x = -0.15 * *x + 0.28 * *y;
 		new_y = 0.26 * *x + 0.24 * *y;
 	}
 	*x = new_x;
 	*y = new_y;
+}
+
+void	fern_cleanup(double *x, double *y, fractal_t *f)
+{
+	mlx_delete_image(f->mlx, f->img);
+	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
+	mlx_image_to_window(f->mlx, f->img, 0, 0);
+	*x = f->x;
+	*y = f->y;
+}
+
+// checks if pixel x or pixel y is in window or outside of window
+int	is_in_window(int pixel_x_pos, int pixel_y_pos, fractal_t *f)
+{
+	if (pixel_x_pos >= 0 && pixel_y_pos >= 0 && pixel_x_pos < f->w_size.width
+		&& pixel_y_pos < f->w_size.height)
+		return (1);
+	return (0);
 }
 
 void	draw_fern(fractal_t *f)
@@ -72,17 +68,15 @@ void	draw_fern(fractal_t *f)
 	int		px;
 	int		py;
 	
-	x = 0;
-	y = 0;
+	fern_cleanup(&x, &y, f);
 	iter = 0;
-	while (iter < 5000)
+	while (iter < FERN_ITERATIONS)
 	{
-		update_image(&x, &y, (double)rand() / INT_MAX);
-		px = (int)(x * f->zoom * f->w_size.width / 10 + f->w_size.width / 2);
-		py = (int)(y * f->zoom * f->w_size.height / 10 + f->w_size.height / 2);
-		if (px >= 0 && px < f->w_size.width
-			&& py < f->w_size.height)
-			mlx_put_pixel(f->img, px, py, get_fern_color(iter, f));
+		update_image(&x, &y, (double)rand() / (double)RAND_MAX);
+		px = (int)((x - f->x) * f->w_size.width / 10 + f->w_size.width / 2);
+		py = (int)f->w_size.height - ((y - f->y) * f->w_size.height / 10);
+		if (is_in_window(px, py, f))
+			mlx_put_pixel(f->img, px, py, GREEN);
 		iter++;
 	}
 }

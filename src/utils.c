@@ -16,7 +16,7 @@ void	init_fractal_bools(fractal_t *f)
 {
 	f->type.MANDELBROT = false;
 	f->type.BURNING_SHIP = false;
-	f->type.SIERPINSKY = false;
+	f->type.JULIA = false;
 	f->type.BARNSLEY_FERN = false;
 }
 

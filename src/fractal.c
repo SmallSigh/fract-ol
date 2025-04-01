@@ -73,13 +73,12 @@ void	illegal_check(fractal_t *f)
 void	render(fractal_t *f)
 {
 	illegal_check(f);
-	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
 	if (f->type.MANDELBROT == true)
 		draw_mandelbrot(f);
 	if (f->type.BURNING_SHIP == true)
 		draw_burning_ship(f);
-	if (f->type.SIERPINSKY == true)
-		draw_sierpinsky(f);
+	if (f->type.JULIA == true)
+		draw_julia(f);
 	if (f->type.BARNSLEY_FERN == true)
 		draw_fern(f);
 	mlx_image_to_window(f->mlx, f->img, 0, 0);

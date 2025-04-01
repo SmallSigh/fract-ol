@@ -63,6 +63,7 @@ void	draw_burning_ship(fractal_t *f)
 	double	cr;
 	double	ci;
 
+	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
 	y = 0;
 	while (y < f->w_size.height)
 	{

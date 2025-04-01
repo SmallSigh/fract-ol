@@ -24,6 +24,8 @@ void	init_f_fractal(fractal_t *f)
 	f->y = 0;
 	f->color = BLACK;
 	f->img = NULL;
+	f->julia.c_real = 0.7;
+	f->julia.c_imag = 0.27;
 }
 
 void	choose_window_size(fractal_t *f)
@@ -40,7 +42,6 @@ void	choose_window_size(fractal_t *f)
 		f->w_size.height = height;
 		f->w_size.width = width;
 		mlx_set_window_size(f->mlx, f->w_size.width, f->w_size.height);
-		f->mlx = mlx_init(width, height, "Big Fractol", true);
 	}
 }
 

@@ -64,18 +64,37 @@ void	ft_scrollhook(double xdelta, double ydelta, void *param)
 	render(f);
 }
 
+void	reset_julia_vars(fractal_t *f)
+{
+	f->zoom = 1.0;
+	f->x = 0;
+	f->y = 0;
+	f->color = BLACK;
+	f->julia.c_real = 0.7;
+	f->julia.c_imag = 0.27;
+}
+
 void	ft_hook(mlx_key_data_t key_data, void *param)
 {
 	fractal_t	*f;
+	int			update_julia;
 
 	f = param;
+	update_julia = 1.1;
 	if (key_data.action == MLX_PRESS)
 	{
 		if (key_data.key == MLX_KEY_ESCAPE)
 			mlx_close_window(f->mlx);
 		if (key_data.key == MLX_KEY_UP)
-			ft_printf("up key has been pressed\n");
+			f->julia.c_imag += update_julia;
 		if (key_data.key == MLX_KEY_DOWN)
-			ft_printf("down key has been pressed\n");
+			f->julia.c_imag -= update_julia;
+		if (key_data.key == MLX_KEY_RIGHT)
+			f->julia.c_real += update_julia;
+		if (key_data.key == MLX_KEY_LEFT)
+			f->julia.c_real -= update_julia;
+		if (key_data.key == MLX_KEY_R)
+			reset_julia_vars(f);
+		render(f);
 	}
 }
