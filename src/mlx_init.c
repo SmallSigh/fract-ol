@@ -42,6 +42,7 @@ void	choose_window_size(t_fractal *f)
 		f->w_size.height = height;
 		f->w_size.width = width;
 		mlx_set_window_size(f->mlx, f->w_size.width, f->w_size.height);
+		mlx_set_window_pos(f->mlx, 0, 0);
 	}
 }
 
@@ -57,6 +58,8 @@ void	cleanup(t_fractal *f)
 {
 	if (f->img)
 		mlx_delete_image(f->mlx, f->img);
+	if (f->mlx->window)
+		mlx_close_window(f->mlx);
 	if (f->mlx)
 		mlx_terminate(f->mlx);
 }

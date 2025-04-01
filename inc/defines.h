@@ -21,9 +21,10 @@ Fractals:\n\
 	\t2. Burning Ship\n\
 	\t3. Julia-set\n\n\
 Flags:\n\
-	\t-f for fullscreen window\n\
 	\t-m for monochrome\n\
-	\t-i for inverted colours\n\n\
+	\t-i for inverted colours\n\
+	\t-f for fullscreen window\n\
+		\t\t(removes cross to close...)\n\n\
 hint, use the arrow keys on julia...\n"
 
 # define FLAG_MAXIMIZE		"-f"
