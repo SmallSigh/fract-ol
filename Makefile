@@ -22,7 +22,6 @@ SRCS = \
 	$(SRC_DIR)/fractal.c \
 	$(SRC_DIR)/utils.c \
 	$(SRC_DIR)/fractal_mandelbrot.c \
-	$(SRC_DIR)/fractal_fern.c \
 	$(SRC_DIR)/fractal_julia.c \
 	$(SRC_DIR)/fractal_burning_ship.c \
 	$(SRC_DIR)/fractal_color.c

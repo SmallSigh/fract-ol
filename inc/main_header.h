@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractal_fern.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/27 14:16:05 by masmit            #+#    #+#             */
+/*   Updated: 2025/03/31 17:16:43 by masmit           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAIN_HEADER_H
 # define MAIN_HEADER_H
 
@@ -23,7 +35,6 @@ typedef struct s_fractalype
 	bool	mandelbrot;
 	bool	burning_ship;
 	bool	julia;
-	bool	barnsley_fern;
 }	t_fractal_type;
 
 typedef struct window_size_s
@@ -37,7 +48,6 @@ typedef struct flags_s
 	bool	maximize;
 	bool	invert;
 	bool	monochrome;
-	bool	terminal;
 }			t_flags;
 
 typedef struct julia_s
@@ -67,8 +77,11 @@ typedef struct s_fractal
 	t_julia			julia;
 }					t_fractal;
 
+// mlx stuff
 void		start_mlx(t_fractal *f);
 void		cleanup(t_fractal *f);
+void		ft_hook(mlx_key_data_t key_data, void *param);
+void		ft_scrollhook(double xdelta, double ydelta, void *param);
 
 //  parse attempt
 void		user_input(int ac, char **av, t_fractal *f);
@@ -89,8 +102,8 @@ void		draw_burning_ship(t_fractal *f);
 void		draw_fern(t_fractal *f);
 void		draw_julia(t_fractal *f);
 
-// mlx controls function
-void		ft_hook(mlx_key_data_t key_data, void *param);
-void		ft_scrollhook(double xdelta, double ydelta, void *param);
+// leftover utils
+int			valid_mouse_pos(int mouse_x, int mouse_y, t_fractal *f);
+void		reset_julia_vars(t_fractal *f);
 
 #endif

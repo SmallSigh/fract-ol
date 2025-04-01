@@ -37,11 +37,6 @@ void	choose_fractal(char *user_input, t_fractal *f)
 		ft_printf("User has choosen: Julia-Set\n");
 		f->type.julia = true;
 	}
-	else if (!ft_strncmp(user_input, "4", 1))
-	{
-		ft_printf("User has choosen: Barnsley Fern\n");
-		f->type.barnsley_fern = true;
-	}
 	else
 		print_entry_error();
 }
@@ -76,7 +71,7 @@ void	parse_input(char **av, t_fractal *f)
 	int	user_input;
 
 	user_input = ft_atoi(av[1]);
-	if (user_input >= 1 && user_input <= 4 && !av[1][1])
+	if (user_input >= 1 && user_input <= 3 && !av[1][1])
 		choose_fractal(av[1], f);
 	else
 		print_entry_error();

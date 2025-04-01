@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractal_fern.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/27 14:16:05 by masmit            #+#    #+#             */
+/*   Updated: 2025/03/31 17:16:43 by masmit           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEFINES_H
 # define DEFINES_H
 
@@ -7,12 +19,12 @@ Usage: ./fractal [(fractal 1-4)] [flags]\n\n\
 Fractals:\n\
 	\t1. Mandelbrot\n\
 	\t2. Burning Ship\n\
-	\t3. Julia-set\n\
-	\t4. Barnsley Fern\n\n\
+	\t3. Julia-set\n\n\
 Flags:\n\
 	\t-f for fullscreen window\n\
 	\t-m for monochrome\n\
-	\t-i for inverted colours\n\n"
+	\t-i for inverted colours\n\n\
+hint, use the arrow keys on julia...\n"
 
 # define FLAG_MAXIMIZE		"-f"
 # define FLAG_BLACK_WHITE	"-m"

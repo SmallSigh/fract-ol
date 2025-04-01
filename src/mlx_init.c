@@ -47,8 +47,6 @@ void	choose_window_size(t_fractal *f)
 
 void	start_mlx(t_fractal *f)
 {
-	if (f->flag.terminal == true)
-		return ;
 	choose_window_size(f);
 	mlx_key_hook(f->mlx, ft_hook, f);
 	mlx_scroll_hook(f->mlx, ft_scrollhook, f);

@@ -35,28 +35,19 @@ static void	zoom_at_position(t_fractal *f, double zoom_factor,
 		f->zoom = 10000000;
 }
 
-int	valid_mouse_pos(int mouse_x, int mouse_y, t_fractal *f)
-{
-	if (mouse_x > f->w_size.width || mouse_x < 0)
-		return (1);
-	if (mouse_y > f->w_size.height || mouse_y < 0)
-		return (1);
-	return (0);
-}
-
-void	ft_scrollhook(double xdelta, double ydelta, void *param)
+void	ft_scrollhook(double scrolldown, double scrollup, void *param)
 {
 	t_fractal	*f;
 	int			mouse_x;
 	int			mouse_y;
 	double		zoom_factor;
 
-	(void)xdelta;
+	(void)scrolldown;
 	f = (t_fractal *)param;
 	mlx_get_mouse_pos(f->mlx, &mouse_x, &mouse_y);
 	if (valid_mouse_pos(mouse_x, mouse_y, f))
 		return ;
-	if (ydelta > 0)
+	if (scrollup > 0)
 		zoom_factor = 1.1;
 	else
 		zoom_factor = 0.9;
@@ -64,35 +55,44 @@ void	ft_scrollhook(double xdelta, double ydelta, void *param)
 	render(f);
 }
 
-void	reset_julia_vars(t_fractal *f)
+void	secret_julia_controls(mlx_key_data_t key_data, t_fractal *f)
 {
-	f->zoom = 1.0;
-	f->x = 0;
-	f->y = 0;
-	f->color = BLACK;
-	f->julia.c_real = 0.7;
-	f->julia.c_imag = 0.27;
+	double			update_julia;
+	double			update_julia_little;
+	int				readability_________________split;
+
+	update_julia = 0.01;
+	update_julia_little = 0.001;
+	if (key_data.key == MLX_KEY_UP)
+		f->julia.c_imag += update_julia;
+	if (key_data.key == MLX_KEY_DOWN)
+		f->julia.c_imag -= update_julia;
+	if (key_data.key == MLX_KEY_RIGHT)
+		f->julia.c_real += update_julia;
+	if (key_data.key == MLX_KEY_LEFT)
+		f->julia.c_real -= update_julia;
+	(void)readability_________________split;
+	if (key_data.key == MLX_KEY_W)
+		f->julia.c_imag += update_julia_little;
+	if (key_data.key == MLX_KEY_S)
+		f->julia.c_imag -= update_julia_little;
+	if (key_data.key == MLX_KEY_D)
+		f->julia.c_real += update_julia_little;
+	if (key_data.key == MLX_KEY_A)
+		f->julia.c_real -= update_julia_little;
 }
 
 void	ft_hook(mlx_key_data_t key_data, void *param)
 {
 	t_fractal	*f;
-	double			update_julia;
 
 	f = param;
-	update_julia = 0.01;
 	if (key_data.action == MLX_PRESS)
 	{
 		if (key_data.key == MLX_KEY_ESCAPE)
 			mlx_close_window(f->mlx);
-		if (key_data.key == MLX_KEY_UP)
-			f->julia.c_imag += update_julia;
-		if (key_data.key == MLX_KEY_DOWN)
-			f->julia.c_imag -= update_julia;
-		if (key_data.key == MLX_KEY_RIGHT)
-			f->julia.c_real += update_julia;
-		if (key_data.key == MLX_KEY_LEFT)
-			f->julia.c_real -= update_julia;
+		if (f->type.julia == true)
+			secret_julia_controls(key_data, f);
 		if (key_data.key == MLX_KEY_R)
 			reset_julia_vars(f);
 		render(f);
