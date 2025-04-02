@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:15:59 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/27 14:40:12 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 16:42:21 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ void	draw_burning_ship(t_fractal *f)
 	double	cr;
 	double	ci;
 
-	if (f->img)
-		mlx_delete_image(f->mlx, f->img);
-	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
 	y = 0;
 	while (y < f->w_size.height)
 	{

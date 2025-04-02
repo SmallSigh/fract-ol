@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:33:11 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/31 14:03:06 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 16:41:49 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ void	draw_mandelbrot(t_fractal *f)
 	double	ci;
 
 	y = 0;
-	if (f->img)
-		mlx_delete_image(f->mlx, f->img);
-	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
 	while (y < f->w_size.height)
 	{
 		x = 0;

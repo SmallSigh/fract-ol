@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 17:13:05 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/31 14:23:44 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 18:00:06 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	choose_window_size(t_fractal *f)
 	f->w_size.height = HEIGHT;
 	f->w_size.width = WIDTH;
 	f->mlx = mlx_init(WIDTH, HEIGHT, "Small Fractol", false);
+	if (!f->mlx)
+		cleanup(f);
 	if (f->flag.maximize)
 	{
 		mlx_get_monitor_size(0, &width, &height);

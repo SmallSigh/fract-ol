@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal_fern.c                                     :+:      :+:    :+:   */
+/*   fractal_color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:16:05 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/31 17:16:43 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 17:30:01 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ uint32_t	fractal_color(int iter, t_fractal *f)
 {
 	uint32_t	colors[8];
 
-	colors[0] = RED;
-	colors[1] = GREEN;
-	colors[2] = BLUE;
-	colors[3] = YELLOW;
-	colors[4] = CYAN;
-	colors[5] = MAGENTA;
-	colors[6] = PURPLE;
-	colors[7] = ORANGE;
+	colors[0] = PURPLE_1;
+	colors[1] = BLUE_1;
+	colors[2] = BLUE_2;
+	colors[3] = BLUEPURPLE;
+	colors[4] = PURPLEBLUE;
+	colors[5] = PURPLE_2;
+	colors[6] = PURPLE_3;
+	colors[7] = PURPLE_4;
 	if (iter == MAX_ITERATIONS)
 	{
 		if (f->flag.invert == true)

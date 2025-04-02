@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal_fern.c                                     :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:16:05 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/31 17:16:43 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 17:30:30 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define INSTRUCTIONS "\n\n\
  \
-Usage: ./fractal [(fractal 1-4)] [flags]\n\n\
+Usage: ./fractol [(fractal 1-3)] [flags]\n\n\
 Fractals:\n\
 	\t1. Mandelbrot\n\
 	\t2. Burning Ship\n\
@@ -34,14 +34,15 @@ hint, use the arrow keys on julia...\n"
 
 # define BLACK		0x000000FF
 # define WHITE		0xFAFAFAFF
-# define RED		0xFF0000FF
-# define GREEN		0x00FF00FF
-# define BLUE		0x0000FFFF
-# define YELLOW		0xFFFF00FF
-# define CYAN		0x00FFFF00
-# define MAGENTA	0xFF00FFFF
-# define ORANGE		0xFFA500FF
-# define PURPLE		0x800080FF
+
+# define BLUE_1			0x1A00E6FF
+# define BLUE_2			0x3300CCFF
+# define BLUEPURPLE		0x4D00B3FF
+# define PURPLEBLUE		0x660099FF
+# define PURPLE_1		0x9932CCFF
+# define PURPLE_2		0x800080FF
+# define PURPLE_3		0x990066FF
+# define PURPLE_4		0xB3004DFF
 
 # define GREY_1		0xFAFAFAFF
 # define GREY_2		0xF0F0F0FF
@@ -57,7 +58,6 @@ hint, use the arrow keys on julia...\n"
 # define WIDTH 1080
 # define HEIGHT 1080
 # define MAX_ITERATIONS 100
-# define FERN_ITERATIONS 100000
 
 // # define DEBUG ft_printf("%s, %d"__FILE__, __LINE__)
 #endif

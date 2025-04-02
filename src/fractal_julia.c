@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal_sierpinsky.c                               :+:      :+:    :+:   */
+/*   fractal_julia.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:16:08 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/31 15:13:56 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 16:42:34 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void	draw_julia(t_fractal *f)
 	double	zx;
 	double	zy;
 
-	if (f->img)
-		mlx_delete_image(f->mlx, f->img);
-	f->img = mlx_new_image(f->mlx, f->w_size.width, f->w_size.height);
 	y = 0;
 	while (y < f->w_size.height)
 	{

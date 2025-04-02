@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 20:19:04 by masmit            #+#    #+#             */
-/*   Updated: 2024/11/21 17:43:31 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 16:43:11 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ char	*get_next_line(int fd);
 size_t	gnl_strlen(const char *s1);
 char	*gnl_strchr(const char *string, int c);
 char	*gnl_strjoin(char *s1, char *s2);
-
 
 #endif
