@@ -17,7 +17,6 @@
 # include "../lib/libft/libft.h"
 # include "../lib/ft_printf/ft_printf.h"
 # include "MLX42/MLX42.h"
-# include "../lib/MLX42/include/MLX42/MLX42_Int.h"
 # include "defines.h"
 
 # include <stdlib.h>
@@ -31,7 +30,7 @@ typedef enum e_fractalype
 	MANDELBROT = 1,
 	BURNING_SHIP,
 	JULIA
-}	e_fractaltype;
+}	t_fractaltype;
 
 typedef struct flags_s
 {
@@ -55,7 +54,7 @@ typedef struct s_fractal
 	double			x;
 	double			y;
 	uint32_t		color;
-	e_fractaltype	fractal_type;
+	t_fractaltype	fractal_type;
 	t_flags			flag;
 	t_julia			julia;
 }					t_fractal;
@@ -64,7 +63,7 @@ typedef struct s_fractal
 void		start_mlx(t_fractal *f);
 void		cleanup(t_fractal *f);
 void		ft_keypress_hook(mlx_key_data_t key_data, void *param);
-void		ft_scrollhook(double xdelta, double ydelta, void *param);
+void		ft_scrollhook(double scrolldown, double scrollup, void *param);
 void		ft_hold_key(void *param);
 
 //  parse attempt
@@ -77,13 +76,13 @@ void		init_fractal(t_fractal *f);
 uint32_t	fractal_color(int iter, t_fractal *f);
 
 // the fractal
-void		draw_mandelbrot(t_fractal *, uint32_t x, uint32_t y);
-void		draw_burning_ship(t_fractal *, uint32_t x, uint32_t y);
-void		draw_julia(t_fractal *, uint32_t x, uint32_t y);
+void		draw_mandelbrot(t_fractal *f, uint32_t x, uint32_t y);
+void		draw_burning_ship(t_fractal *f, uint32_t x, uint32_t y);
+void		draw_julia(t_fractal *f, uint32_t x, uint32_t y);
 
 // leftover utils
-int			is_valid_mouse_pos(int mouse_x, int mouse_y, t_fractal *f);
 void		reset_julia_vars(t_fractal *f);
-void		my_draw_pixel(uint8_t *pixel, uint32_t color);
+void		julia_controls_press(mlx_key_data_t key_data, t_fractal *f);
+void		my_draw_pixel(t_fractal *f, uint32_t x, uint32_t y, uint32_t color);
 
 #endif

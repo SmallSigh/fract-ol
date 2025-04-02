@@ -43,16 +43,13 @@ static void	zoom_at_position(t_fractal *f, double zoom_factor,
 void	ft_scrollhook(double scrolldown, double scrollup, void *param)
 {
 	t_fractal	*f;
-	int			mouse_x;
-	int			mouse_y;
+	int32_t		mouse_x;
+	int32_t		mouse_y;
 	double		zoom_factor;
 
 	(void)scrolldown;
-	ft_printf("no segfault yet.\n");
 	f = (t_fractal *)param;
 	mlx_get_mouse_pos(f->mlx, &mouse_x, &mouse_y);
-	if (!is_valid_mouse_pos(mouse_x, mouse_y, f))
-		return ;
 	if (scrollup > 0)
 		zoom_factor = 1.1;
 	else
@@ -86,23 +83,6 @@ void	julia_controls_press(mlx_key_data_t key_data, t_fractal *f)
 		f->julia.c_real -= update_julia_little;
 }
 
-void	ft_keypress_hook(mlx_key_data_t key_data, void *param)
-{
-	t_fractal	*f;
-
-	f = param;
-	if (key_data.action == MLX_PRESS)
-	{
-		if (key_data.key == MLX_KEY_ESCAPE)
-			mlx_close_window(f->mlx);
-		if (f->fractal_type == JULIA)
-			julia_controls_press(key_data, f);
-		if (key_data.key == MLX_KEY_R)
-			reset_julia_vars(f);
-		render(f);
-	}
-}
-
 void	julia_controls_hold(t_fractal *f)
 {
 	double			update_julia;
@@ -130,7 +110,7 @@ void	julia_controls_hold(t_fractal *f)
 
 void	ft_hold_key(void *param)
 {
-	t_fractal *f;
+	t_fractal	*f;
 
 	f = param;
 	if (f->fractal_type == JULIA)

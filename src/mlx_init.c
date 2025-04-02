@@ -12,11 +12,6 @@
 
 #include "main_header.h"
 
-void	print_error_and_exit(char *str)
-{
-	ft_printf("ERROR: %s", str);
-}
-
 void	init_fractal(t_fractal *f)
 {
 	f->zoom = 1.0;
@@ -62,4 +57,21 @@ void	cleanup(t_fractal *f)
 	if (f->mlx)
 		mlx_terminate(f->mlx);
 	exit(EXIT_SUCCESS);
+}
+
+void	ft_keypress_hook(mlx_key_data_t key_data, void *param)
+{
+	t_fractal	*f;
+
+	f = param;
+	if (key_data.action == MLX_PRESS)
+	{
+		if (key_data.key == MLX_KEY_ESCAPE)
+			mlx_close_window(f->mlx);
+		if (f->fractal_type == JULIA)
+			julia_controls_press(key_data, f);
+		if (key_data.key == MLX_KEY_R)
+			reset_julia_vars(f);
+		render(f);
+	}
 }

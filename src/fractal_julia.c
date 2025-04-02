@@ -34,12 +34,10 @@ void	draw_julia(t_fractal *f, uint32_t x, uint32_t y)
 {
 	double		zx;
 	double		zy;
-	uint32_t	*pixel_pos;
 
 	zx = (x - f->mlx->width / 2.0)
 		/ (0.5 * f->zoom * f->mlx->width) + f->x;
 	zy = (y - f->mlx->height / 2.0)
 		/ (0.5 * f->zoom * f->mlx->height) + f->y;
-	pixel_pos = (uint32_t *)&f->img->pixels[(y * f->img->width + x) * BPP];
-	my_draw_pixel((uint8_t *)pixel_pos, fractal_color(julia_iter(zx, zy, f), f));
+	my_draw_pixel(f, x, y, fractal_color(julia_iter(zx, zy, f), f));
 }

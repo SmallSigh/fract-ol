@@ -38,12 +38,10 @@ void	draw_burning_ship(t_fractal *f, uint32_t x, uint32_t y)
 {
 	double	cr;
 	double	ci;
-	uint32_t	*pixel_pos;
 
 	cr = (x - f->mlx->width / 2.0)
 		* 4.0 / (f->mlx->width * f->zoom) + f->x;
 	ci = (y - f->mlx->height / 2.0)
 		* 4.0 / (f->mlx->height * f->zoom) + f->y;
-	pixel_pos = (uint32_t *)&f->img->pixels[(y * f->img->width + x) * BPP];
-	my_draw_pixel((uint8_t *)pixel_pos, fractal_color(burning_ship_iter(cr, ci), f));
+	my_draw_pixel(f, x, y, fractal_color(burning_ship_iter(cr, ci), f));
 }

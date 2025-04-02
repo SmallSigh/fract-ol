@@ -58,6 +58,5 @@ hint, use the arrow keys on julia...\n"
 # define WIDTH				1080
 # define HEIGHT				1080
 # define MAX_ITERATIONS		20
-# define BPP				sizeof(int32_t)
 
 #endif

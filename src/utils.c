@@ -22,16 +22,16 @@ void	reset_julia_vars(t_fractal *f)
 	f->julia.c_imag = 0.27;
 }
 
-int	is_valid_mouse_pos(int mouse_x, int mouse_y, t_fractal *f)
+void	my_draw_pixel(t_fractal *f, uint32_t x, uint32_t y, uint32_t color)
 {
-	if (mouse_x > f->win->width || mouse_x < 0)
-		return (false);
-	if (mouse_y > f->win->height || mouse_y < 0)
-		return (false);
-	return (true);
+	uint32_t	*pixel_pos;
+
+	pixel_pos = (uint32_t *)&f->img->pixels
+	[(y * f->img->width + x) * sizeof(int32_t)];
+	*(uint32_t *)pixel_pos = color;
 }
 
-void	my_draw_pixel(uint8_t *pixel, uint32_t color)
+void	print_error_and_exit(char *str)
 {
-	*(uint32_t *)pixel = color;
+	ft_printf("ERROR: %s", str);
 }
