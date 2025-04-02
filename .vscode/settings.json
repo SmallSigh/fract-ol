@@ -2,6 +2,7 @@
     "files.associations": {
         "main_header.h": "c",
         "cstdint": "c",
-        "main_defines.h": "c"
+        "main_defines.h": "c",
+        "mlx42_int.h": "c"
     }
 }

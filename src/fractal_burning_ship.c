@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:15:59 by masmit            #+#    #+#             */
-/*   Updated: 2025/04/02 16:42:21 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 23:04:47 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,16 @@ static int	burning_ship_iter(double cr, double ci)
 	return (iter);
 }
 
-void	draw_burning_ship(t_fractal *f)
+void	draw_burning_ship(t_fractal *f, uint32_t x, uint32_t y)
 {
-	int		x;
-	int		y;
 	double	cr;
 	double	ci;
+	uint32_t	*pixel_pos;
 
-	y = 0;
-	while (y < f->w_size.height)
-	{
-		x = 0;
-		while (x < f->w_size.width)
-		{
-			cr = (x - f->w_size.width / 2.0)
-				* 4.0 / (f->w_size.width * f->zoom) + f->x;
-			ci = (y - f->w_size.height / 2.0)
-				* 4.0 / (f->w_size.height * f->zoom) + f->y;
-			mlx_put_pixel(f->img, x, y,
-				fractal_color(burning_ship_iter(cr, ci), f));
-			x++;
-		}
-		y++;
-	}
+	cr = (x - f->mlx->width / 2.0)
+		* 4.0 / (f->mlx->width * f->zoom) + f->x;
+	ci = (y - f->mlx->height / 2.0)
+		* 4.0 / (f->mlx->height * f->zoom) + f->y;
+	pixel_pos = (uint32_t *)&f->img->pixels[(y * f->img->width + x) * BPP];
+	my_draw_pixel((uint8_t *)pixel_pos, fractal_color(burning_ship_iter(cr, ci), f));
 }

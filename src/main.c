@@ -6,7 +6,7 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:49:29 by masmit            #+#    #+#             */
-/*   Updated: 2025/04/02 17:19:28 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 22:34:28 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	main(int ac, char **av)
 {
 	t_fractal	f;
 
-	init_flag_bools(&f);
-	init_fractal_bools(&f);
+	ft_memset(&f, 0, sizeof(t_fractal));
 	user_input(ac, av, &f);
 	start_mlx(&f);
 	render(&f);

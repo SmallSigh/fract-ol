@@ -6,33 +6,38 @@
 /*   By: masmit <masmit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:16:25 by masmit            #+#    #+#             */
-/*   Updated: 2025/03/31 14:19:59 by masmit           ###   ########.fr       */
+/*   Updated: 2025/04/02 23:19:16 by masmit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_header.h"
 
 static void	zoom_at_position(t_fractal *f, double zoom_factor,
-				int mouse_x, int mouse_y)
+	int mouse_x, int mouse_y)
 {
 	double	mouse_r;
 	double	mouse_i;
 	double	new_center_r;
 	double	new_center_i;
+	double	prev_zoom;
 
-	mouse_r = (mouse_x - f->w_size.width / 2.0)
-		* 4.0 / (f->w_size.width * f->zoom) + f->x;
-	mouse_i = (mouse_y - f->w_size.height / 2.0)
-		* 4.0 / (f->w_size.height * f->zoom) + f->y;
+	mouse_r = (mouse_x - f->img->width / 2.0)
+		* 4.0 / (f->img->width * f->zoom) + f->x;
+	mouse_i = (mouse_y - f->img->height / 2.0)
+		* 4.0 / (f->img->height * f->zoom) + f->y;
 	new_center_r = f->x + (mouse_r - f->x) * (1 - 1 / zoom_factor);
 	new_center_i = f->y + (mouse_i - f->y) * (1 - 1 / zoom_factor);
-	f->x = new_center_r;
-	f->y = new_center_i;
+	prev_zoom = f->zoom;
 	f->zoom *= zoom_factor;
-	if (f->zoom < 0.1)
-		f->zoom = 0.1;
+	if (f->zoom < 0.0001)
+		f->zoom = 0.0001;
 	if (f->zoom > 10000000)
 		f->zoom = 10000000;
+	if (f->zoom != prev_zoom)
+	{
+		f->x = new_center_r;
+		f->y = new_center_i;
+	}
 }
 
 void	ft_scrollhook(double scrolldown, double scrollup, void *param)
@@ -43,9 +48,10 @@ void	ft_scrollhook(double scrolldown, double scrollup, void *param)
 	double		zoom_factor;
 
 	(void)scrolldown;
+	ft_printf("no segfault yet.\n");
 	f = (t_fractal *)param;
 	mlx_get_mouse_pos(f->mlx, &mouse_x, &mouse_y);
-	if (valid_mouse_pos(mouse_x, mouse_y, f))
+	if (!is_valid_mouse_pos(mouse_x, mouse_y, f))
 		return ;
 	if (scrollup > 0)
 		zoom_factor = 1.1;
@@ -55,11 +61,10 @@ void	ft_scrollhook(double scrolldown, double scrollup, void *param)
 	render(f);
 }
 
-void	secret_julia_controls(mlx_key_data_t key_data, t_fractal *f)
+void	julia_controls_press(mlx_key_data_t key_data, t_fractal *f)
 {
 	double			update_julia;
 	double			update_julia_little;
-	int				readability_________________split;
 
 	update_julia = 0.01;
 	update_julia_little = 0.001;
@@ -71,7 +76,6 @@ void	secret_julia_controls(mlx_key_data_t key_data, t_fractal *f)
 		f->julia.c_real += update_julia;
 	if (key_data.key == MLX_KEY_LEFT)
 		f->julia.c_real -= update_julia;
-	(void)readability_________________split;
 	if (key_data.key == MLX_KEY_W)
 		f->julia.c_imag += update_julia_little;
 	if (key_data.key == MLX_KEY_S)
@@ -82,7 +86,7 @@ void	secret_julia_controls(mlx_key_data_t key_data, t_fractal *f)
 		f->julia.c_real -= update_julia_little;
 }
 
-void	ft_hook(mlx_key_data_t key_data, void *param)
+void	ft_keypress_hook(mlx_key_data_t key_data, void *param)
 {
 	t_fractal	*f;
 
@@ -91,10 +95,45 @@ void	ft_hook(mlx_key_data_t key_data, void *param)
 	{
 		if (key_data.key == MLX_KEY_ESCAPE)
 			mlx_close_window(f->mlx);
-		if (f->type.julia == true)
-			secret_julia_controls(key_data, f);
+		if (f->fractal_type == JULIA)
+			julia_controls_press(key_data, f);
 		if (key_data.key == MLX_KEY_R)
 			reset_julia_vars(f);
 		render(f);
 	}
+}
+
+void	julia_controls_hold(t_fractal *f)
+{
+	double			update_julia;
+	double			update_julia_little;
+
+	update_julia = 0.01;
+	update_julia_little = 0.001;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_UP))
+		f->julia.c_imag += update_julia;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_DOWN))
+		f->julia.c_imag -= update_julia;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_RIGHT))
+		f->julia.c_real += update_julia;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_LEFT))
+		f->julia.c_real -= update_julia;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_W))
+		f->julia.c_imag += update_julia_little;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_S))
+		f->julia.c_imag -= update_julia_little;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_D))
+		f->julia.c_real += update_julia_little;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_A))
+		f->julia.c_real -= update_julia_little;
+}
+
+void	ft_hold_key(void *param)
+{
+	t_fractal *f;
+
+	f = param;
+	if (f->fractal_type == JULIA)
+		julia_controls_hold(f);
+	render(f);
 }
