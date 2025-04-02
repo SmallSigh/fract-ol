@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Iinc -Ilib/libft -Wunreachable-code -Ofast -g
+CFLAGS = -Wall -Werror -Wextra -Iinc -Ilib/libft -Wunreachable-code -Ofast -g
 
 LIBMLX = ./lib/MLX42
 MLX_BUILD = $(LIBMLX)/build

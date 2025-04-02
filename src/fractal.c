@@ -14,8 +14,8 @@
 
 void	render(t_fractal *f)
 {
-	uint32_t	x;
-	uint32_t	y;
+	int32_t	x;
+	int32_t	y;
 
 	if (f->img)
 		ft_bzero(f->img->pixels,
